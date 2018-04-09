@@ -9,7 +9,7 @@ import 'rxjs/add/operator/take';
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.css']
 })
-export class ProductFormComponent implements OnInit {
+export class ProductFormComponent {
 
   categories$;
   product = {};
@@ -21,7 +21,7 @@ export class ProductFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.categories$ = categoryService.getCategories();
+    this.categories$ = categoryService.getAll();
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
       this.productService.getProduct(this.id)
@@ -30,8 +30,6 @@ export class ProductFormComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-  }
 
   create(product): void {
     if (this.id) {
