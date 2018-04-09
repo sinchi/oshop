@@ -2,36 +2,58 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from '../../product.service';
 import { Subscription } from 'rxjs';
 import { Product } from '../../models/product';
+import { DataTableResource, DataTableParams } from 'angular5-data-table';
 
 @Component({
   selector: 'app-admin-products',
   templateUrl: './admin-products.component.html',
   styleUrls: ['./admin-products.component.css']
 })
-export class AdminProductsComponent implements OnInit, OnDestroy {
+export class AdminProductsComponent implements OnDestroy {
 
   subscription: Subscription;
   products: Product[];
-  filteredProducts: any[];
+  tableResource: DataTableResource<Product>;
+  items: Product[] = [];
+  itemCount: number;
 
   constructor(private productService: ProductService) {
     this.subscription = this.productService.getAll()
-    .subscribe(products => this.filteredProducts = this.products = products);
+    .subscribe(products => {
+      this.products = products;
+      this.initializeTable(products);
+      }
+    );
    }
 
-  ngOnInit() {
-  }
+   private initializeTable(products: Product[]) {
+    this.tableResource = new DataTableResource(products);
+
+    this.tableResource.query({ offset: 0 })
+    .then(items => this.items = items);
+
+    this.tableResource.count()
+    .then(count => this.itemCount = count);
+   }
+
+   reloadItems(params: DataTableParams) {
+     if (!this.tableResource) {
+       return;
+     }
+    this.tableResource.query(params)
+    .then(items => this.items = items);
+   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
   filter(query: string) {
-    this.filteredProducts = (query) ?
+    const filteredProducts = (query) ?
     this.products.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) :
     this.products;
+
+    this.initializeTable(filteredProducts);
   }
-
-
 
 }

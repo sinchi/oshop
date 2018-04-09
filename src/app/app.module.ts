@@ -7,7 +7,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { CustomFormsModule } from 'ng2-validation';
-import { DataTableModule } from 'angular-4-data-table';
+import { DataTableModule } from 'angular5-data-table';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
