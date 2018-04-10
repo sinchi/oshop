@@ -11,10 +11,10 @@ export class ProductCardComponent  {
 
   @Input('product') product;
   @Input('showActions') showActions = true;
+
   constructor(private cartService: ShoppingCartService) { }
 
-
   addToCart(product: Product) {
-    this.cartService.create();
+    this.cartService.addToCart(product);
   }
 }
