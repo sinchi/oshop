@@ -2,10 +2,13 @@ import { ShoppingCartItem } from './shopping-cart-item';
 
 export class ShoppingCart {
 
-  constructor(public items: ShoppingCartItem[]) {}
+  items: ShoppingCartItem[] = [];
 
-  get productsIds() {
-    return Object.keys(this.items);
+  constructor(public itemsMap: {[productId: string]: ShoppingCartItem}) {
+    // tslint:disable-next-line:forin
+    for (const productId in itemsMap) {
+      this.items.push(itemsMap[productId]);
+    }
   }
 
   get totalItemsCount() {
