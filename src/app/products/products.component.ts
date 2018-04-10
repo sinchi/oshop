@@ -14,33 +14,30 @@ import { Subscription } from 'rxjs';
 })
 export class ProductsComponent implements OnInit, OnDestroy {
 
-
-
   products: Product[];
   filteredProducts: Product[] = [];
   category;
   cart: any;
   subscription: Subscription;
 
-
   constructor(
     productService: ProductService,
     route: ActivatedRoute,
     private shoppingCartService: ShoppingCartService
    ) {
-    productService
-    .getAll()
-    .switchMap(products => {
-      this.products = products;
-      return route.queryParamMap;
-    })
-    .subscribe(params => {
-        this.category = params.get('category');
+      productService
+      .getAll()
+      .switchMap(products => {
+        this.products = products;
+        return route.queryParamMap;
+      })
+      .subscribe(params => {
+          this.category = params.get('category');
 
-        this.filteredProducts = (this.category) ?
-        this.products.filter(p => p.category === this.category) :
-        this.products;
-    });
+          this.filteredProducts = (this.category) ?
+          this.products.filter(p => p.category === this.category) :
+          this.products;
+      });
 
    }
 
