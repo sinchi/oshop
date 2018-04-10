@@ -58,4 +58,9 @@ export class ShoppingCartService {
        });
     });
   }
+
+  async clearCart() {
+    const cartId = await this.getOrCreateCartId();
+    this.db.object(`/shopping-carts/${cartId}/items`).remove();
+  }
 }
