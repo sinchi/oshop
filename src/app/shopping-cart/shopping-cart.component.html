@@ -13,15 +13,20 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of cart.items">
+            <td>
+              <div [style.backgroundImage]="'url(' + item.imageUrl + ')'" class="thumbnail">
+                </div>
+            </td>
             <td>{{ item.title }}</td>
             <td>
               <app-product-quantity [product]="item" [shoppingCart]="cart" ></app-product-quantity>
             </td>
-            <td class="text-right">{{ item.totalPrice | currency:'EUR':true }}</td>
+            <td>{{ item.totalPrice | currency:'EUR':true }}</td>
           </tr>
         </tbody>
         <tfoot>
           <tr>
+            <th></th>
             <th></th>
             <th></th>
             <th class="text-right">{{ cart.totalPrice | currency:'EUR':true }}</th>
