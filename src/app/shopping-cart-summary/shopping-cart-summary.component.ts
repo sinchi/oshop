@@ -1,0 +1,17 @@
+import { Component, Input } from '@angular/core';
+import { Product } from '../models/product';
+import { ShoppingCart } from '../models/shopping-cart';
+
+@Component({
+  selector: 'app-shopping-cart-summary',
+  templateUrl: './shopping-cart-summary.component.html',
+  styleUrls: ['./shopping-cart-summary.component.css']
+})
+export class ShoppingCartSummaryComponent  {
+
+  @Input('shoppingCart') shoppingCart: ShoppingCart;
+
+  constructor() { }
+
+
+}
