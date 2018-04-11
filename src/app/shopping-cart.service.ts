@@ -61,7 +61,6 @@ export class ShoppingCartService {
           quantity: (item.quantity || 0) + change
          });
       }
-
     });
   }
 

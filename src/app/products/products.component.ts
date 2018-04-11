@@ -26,15 +26,11 @@ export class ProductsComponent implements OnInit {
     private productService: ProductService,
     private route: ActivatedRoute,
     private shoppingCartService: ShoppingCartService
-   ) {
-
-
-   }
+   ) {}
 
    async ngOnInit() {
     this.cart$ = await this.shoppingCartService.getCart();
     this.populateProduct();
-
   }
 
   private populateProduct() {
@@ -47,7 +43,6 @@ export class ProductsComponent implements OnInit {
       .subscribe(params => {
           this.category = params.get('category');
           this.applyFilter();
-
       });
   }
 
